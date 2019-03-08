@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>01_HelloWorld</title>
+</head>
+<body>
+  <!--这一块相当于是vue的模板： =html+js  -->
+  <!--
+    模板： html+js
+    js在模板存在的形式：
+      v-model="xx": 指令  vue自定义的标签属性,后面的内容按照表达式来解析
+      {{xx}}: 插值/双大括号表达式
+  -->
+  <div id="app">
+    <input type="text" v-model="msg">
+    <h1>Hello,{{msg}}</h1>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script type="text/javascript">
+    new Vue({ //配置对象
+      el: '#app',
+      data: {
+        msg: '北京'
+      }
+    })
+  </script>
+</body>
+</html>
