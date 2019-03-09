@@ -17,16 +17,84 @@
   计算属性存在缓存, 多次读取只执行一次getter计算
 -->
 <div id="demo">
-  姓: <input type="text" placeholder="First Name"><br>
-  名: <input type="text" placeholder="Last Name"><br>
-  姓名1(单向): <input type="text" placeholder="Full Name1"><br>
-  姓名2(单向): <input type="text" placeholder="Full Name2"><br>
-  姓名3(双向): <input type="text" placeholder="Full Name3"><br>
+  姓: <input type="text" placeholder="First Name" v-model="firstName"><br>
+  名: <input type="text" placeholder="Last Name" v-model="lastName"><br>
+  姓名1(单向): <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
+  姓名2(单向): <input type="text" placeholder="Full Name2" v-model="fullName2"><br>
+  姓名3(双向): <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
+
+
+  <p>{{ fullName1 }}1</p>
+  <p>{{ fullName1 }}1</p>
+  <p>{{ fullName1 }}1</p>
+  <p>{{ fullName2 }}2</p>
+  <p>{{ fullName2 }}2</p>
+  <p>{{ fullName2 }}2</p>
+  <p>{{ fullName3 }}3</p>
+  <p>{{ fullName3 }}3</p>
+  <p>{{ fullName3 }}3</p>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
 
+  const vm = new Vue({
+    el: '#demo',
+    data: {
+      firstName: 'Steven',
+      lastName: 'Grud',
+      fullName2: ''
+    },
+    computed: {
+      /*
+      当初始显示或相关的数据发生改变时, 自动调用
+      为属性产生属性值, 相当于属性的getter
+      this是vm对象 ===> 所有vue控制的回调函数this都vm对象
+       */
+      //单项绑定 -- getter
+      fullName1 () {
+        console.log('fullName1 ()')
+        return this.firstName + '-' + this.lastName
+      },
+      /*fullName3 {
+        console.log('fullName3 ()')
+        return this.firstName + '-' + this.lastName
+      }*/
+      fullName3: {
+        //获取
+        get () {
+          console.log('fullName3 ()--get')
+          return this.firstName + '-' + this.lastName
+        },
+        //设置
+        set (value) {
+          console.log('fullName3 ()--set')
+          const names = value.split('-')
+          this.firstName = names[0]
+          this.lastName = names[1]
+        }
+      }
+    },
+    watch: {  //watch监听属性的第一种方式
+      firstName (newVal, oldVal) { //监听的新值 监听的旧值
+        console.log('watch------')
+        this.fullName2 = newVal + '-' + this.lastName
+      }
+    }
+  })
+
+  //watch监听属性的第二种方式
+  vm.$watch('lastName', function (val) {
+    console.log('12323232')
+    this.fullName2 = this.firstName + '-' + val
+  })
+
+  /*
+  *回调函数的3个问题
+  * 1.什么时候调用
+  * 2.用来做什么
+  * 3.this是谁
+  * */
 </script>
 </body>
 </html>

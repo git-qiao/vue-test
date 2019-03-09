@@ -15,10 +15,37 @@
 -->
 
 <div id="demo">
+
+  <h1 v-if="flagA">这是1111111</h1>
+  <h1 v-else>这是2222222</h1>
+
+  <hr/>
+  <h1 v-show="flagB">这是33333333</h1>
+  <h1 v-show="!flagB">这是44444444</h1>
+  <hr/>
+  <button @click="flagA=!flagA;flagB=!flagB">改变一下</button>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#demo',  //vm容器的生效范围
+    data: {       //所需数据
+      flagA: true,
+      flagB: true,
+    },
+    methods: {    //一些方法
+      changeHandle () {
+
+      }
+    },
+    computed: {    //计算属性
+
+    },
+    watch: {      //添加监听
+
+    }
+  })
 </script>
 </body>
 </html>

@@ -32,14 +32,43 @@
 
 <div id="demo">
   <h2>1. class绑定: :class='xxx'</h2>
+  <p class="classB" :class="classA">xxx是字符串  <b>--类名是不确定的--</b></p>
+  <p :class="{classA: hasA,classB: hasB}">xxx是对象 <b>--类名是确定的, 只是不确定有没有--</b></p>
+  <p :class="[classA,classC]">xxx是数组</p>
 
   <h2>2. style绑定</h2>
+  <p :style="{color:myColor ,fontSize: '20px'}">这里是P标签</p>
 
+
+  <button @click="handleClick">切换样式</button>
 </div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#demo',
+    data: {
+      classA: 'classA',
+      classB: 'classB',
+      classC: 'classC',
+      hasA: true,
+      hasB: false,
+      myColor: 'red'
+    },
+    methods: {
+      handleClick () {
+        this.hasA = !this.hasA
+        this.hasB = !this.hasB
+        this.myColor = 'darkred'
+      }
+    },
+    computed: {
 
+    },
+    watch: {
+
+    }
+  })
 </script>
 </body>
 </html>

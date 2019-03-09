@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>defineProperty()方法的分析</title>
+</head>
+<body>
+<script>
+  /*
+  * 给p添加属性： fuName = fName + lName
+  * 并且fName lName 改变，fuName也会改变
+  *    fuName改变，fName lName也会改变
+  * */
+  var person = {
+    firstName: 'Steven',
+    lastName: 'Jobs'
+  }
+  //Object.defineProperty() 方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性， 并返回这个对象
+  Object.defineProperty(person, 'fullName', {//配置对象  属性描述符
+    // 当读取属性值的时候，自动调用   /   get()的返回值作为属性值  /  this--读取属性的当前对象
+    get () {
+      return this.firstName + '-' + this.lastName
+    },
+    // 当属性值的时候，自动调用   /  set()监视属性值的变化   /   this--设置修改属性的当前对象
+    set (val) { //val 表示fullName的最新值
+      const names = val.split('-')
+      this.firstName = names[0]
+      this.lastName = names[1]
+    }
+  })
+  console.log(person.fullName)
+  person.firstName = 'HAHA'
+  console.log(person.fullName)
+  person.fullName = 'jajaj-kjkj'
+  console.log(person.firstName, '-----------', person.lastName)
+  /*
+  *回调函数的3个问题
+  * 1.什么时候调用
+  * 2.用来做什么
+  * 3.this是谁
+  * */
+</script>
+</body>
+</html>
