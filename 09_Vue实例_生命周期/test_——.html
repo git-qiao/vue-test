@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>09_Vue实例_生命周期</title>
+</head>
+<body>
+<!--
+1. vue对象的生命周期
+  1). 初始化显示
+    * beforeCreate()
+    * created()
+    * beforeMount()
+    * mounted()
+  2). 更新状态
+    * beforeUpdate()
+    * updated()
+  3). 销毁vue实例: vm.$destory()
+    * beforeDestory()
+    * destoryed()
+2. 常用的生命周期方法
+  created()/mounted(): 发送ajax请求, 启动定时器等异步任务
+  beforeDestory(): 做收尾工作, 如: 清除定时器
+-->
+
+<div id="app">
+  <button @click="destroyVm">销毁 vm</button>
+  <p v-show="showFlag">一秒钟进行自动切换</p>
+</div>
+
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript">
+  new Vue({
+    el: '#app',
+    data: {
+      showFlag: true
+    },
+    methods: {
+      destroyVm () {
+        this.$destroy()
+      }
+    },
+    //在页面第一次显示之后自动调用，启动异步任务（定时器，Ajax请求，绑定自定义监听）
+    mounted () {
+      //开启循环定时器
+      this.timer = setInterval(()=>{
+        console.log('定时器在执行...')
+        this.showFlag = !this.showFlag
+      },1000)
+    },
+    //在vm收尾之前进行调用，做一些收尾的工作(比如：清除定时器)
+    beforeDestroy () {
+      clearInterval(this.timer)
+    }
+  })
+
+</script>
+</body>
+</html>
