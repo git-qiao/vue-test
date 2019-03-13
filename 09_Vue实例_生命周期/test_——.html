@@ -40,8 +40,15 @@
         this.$destroy()
       }
     },
+    beforeCreate () {console.log('beforeCreate()')},
+    created () {console.log('created()')},
+    beforeUpdate () {console.log('beforeUpdate()')},
+    updated () {console.log('updated()')},
+    beforeMount () {console.log('beforeMount()')},
+
     //在页面第一次显示之后自动调用，启动异步任务（定时器，Ajax请求，绑定自定义监听）
     mounted () {
+      console.log('mounted()')
       //开启循环定时器
       this.timer = setInterval(()=>{
         console.log('定时器在执行...')
@@ -50,8 +57,10 @@
     },
     //在vm收尾之前进行调用，做一些收尾的工作(比如：清除定时器)
     beforeDestroy () {
+      console.log('beforeDestroy()')
       clearInterval(this.timer)
-    }
+    },
+    destroyed () {console.log('destroyed()')}
   })
 
 </script>

@@ -2,27 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Document</title>
+  <title>自动收集数据绑定</title>
 </head>
 <body>
   <form action="/app" method="post" id="f">
-    <input type="text" placeholder="用户名"><br>
-    <input type="password" placeholder="用户名"><br>
-    <input type="radio" name="sex">男
-    <input type="radio" name="sex">女<br>
+    <input type="text" placeholder="用户名" v-model="user.username"><br>
+    <input type="password" placeholder="密码" v-model="user.pwd"><br>
 
-    <input type="checkbox" name="hobby">吃
-    <input type="checkbox" name="hobby">喝
-    <input type="checkbox" name="hobby">拉
-    <input type="checkbox" name="hobby">撒 <br>
+    <input type="radio" name="sex" value="male" v-model="user.sex">男
+    <input type="radio" name="sex" value="female" v-model="user.sex">女<br>
 
-    <select name="city" id="city">
+    <input type="checkbox" name="hobby" value="eat" v-model="user.hobby">吃
+    <input type="checkbox" name="hobby" value="drink" v-model="user.hobby">喝
+    <input type="checkbox" name="hobby" value="pu" v-model="user.hobby">拉
+    <input type="checkbox" name="hobby" value="chi" v-model="user.hobby">撒 <br>
+
+    <select name="city" id="city" v-model="user.cityId">
       <option value="">未选择</option>
+      <option v-for="city in citys" :value="city.id" :key="city.id">{{city.name}}</option>
     </select> <br>
 
     <textarea name="desc" id="desc" cols="30" rows="10" placeholder="请输入。。。"></textarea><br>
 
-    <button type="submit">提交</button>
+    <button type="submit" @click.prevent="submitHandle">提交</button>
   </form>
 
   <script src="../js/vue.js"></script>
@@ -30,9 +32,27 @@
     new Vue({
       el: '#f',
       data: {
+        // 城市列表数据
         citys: [
-          {id: 1, }
-        ]
+          {id: 1, name: '北京'},
+          {id: 2, name: '上海'},
+          {id: 3, name: '深圳'},
+          {id: 4, name: '高平'},
+        ],
+        // 用户信息
+        user: {
+          username: '', //用户名
+          pwd: '',      //密码
+          sex: 'male',     //性别
+          hobby: ['eat', 'drink'],       //爱好
+          cityId: ''
+        },
+      },
+      methods: {
+        submitHandle () {
+          console.log('一般在框架中，不会触发默认的提交行为，而是会发送一个Ajax请求')
+          console.log(this.user)
+        }
       }
     })
   </script>

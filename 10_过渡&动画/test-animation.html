@@ -2,14 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>10_过渡&动画2</title>
+  <title>10_帧动画</title>
+  <style>
 
+    /*进入的过渡样式*/
+    .ani-enter-active{
+      animation: ani 2s;
+    }
+    /*出场的过渡样式*/
+    .ani-leave-active{
+      animation: ani 2s reverse;
+    }
+    /*起始和结束的样式*/
+    .ani-enter,.ani-leave-to{
+
+    }
+    @keyframes ani {
+      0% {
+        transform: scale(0);
+      }
+      50% {
+        transform: scale(1.5);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  </style>
 </head>
 <body>
-
+  <div id="example">
+    <button @click="show = !show">Toggle show</button>
+    <transition name="ani">
+      <p v-if="show">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris facilisis enim libero, at lacinia diam fermentum id. Pellentesque habitant morbi tristique senectus et netus.</p>
+    </transition>
+  </div>
 <script type="text/javascript" src="../js/vue.js"></script>
 <script>
-
+  new Vue({
+    el: '#example',
+    data: {
+      show: true
+    }
+  })
 </script>
 </body>
 </html>

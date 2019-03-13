@@ -2,7 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>10_过渡&动画1</title>
+  <title>10_过渡动画</title>
+  <style>
+    /*过渡过程  -- 过滤的效果样式*/
+    .fade-enter-active, .fade-leave-active {
+      transition: opacity 2s;
+    }
+    /*过渡开始和过渡结束的状态  --  隐藏时的样式*/
+    .fade-enter, .fade-leave-to {
+      opacity: 0;
+    }
+
+    /*显示过渡的效果样式*/
+    .fade2-enter-active{
+      transition: opacity .5s;
+    }
+    /*隐藏过渡的效果样式*/
+    .fade2-leave-active{
+      transition: opacity 3s;
+    }
+    /*隐藏时的样式*/
+    .fade2-enter,.fade2-leave-to{
+      opacity: 0;
+    }
+  </style>
 </head>
 <body>
 <!--
@@ -19,11 +42,39 @@
   xxx-leave-active: 指定隐藏的transition
   xxx-enter: 指定隐藏时的样式
 -->
+<div id="app">
+  <button @click="flag=!flag">切换</button>
+  <transition name="fade">
+    <p v-show="flag">Heloise</p>
+  </transition>
+</div>
 
+<div id="app2">
+  <button @click="flag=!flag">切换</button>
+  <transition name="fade2">
+    <p v-show="flag">Heloise</p>
+  </transition>
+</div>
 
 <script type="text/javascript" src="../js/vue.js"></script>
 <script type="text/javascript">
+  new Vue({
+    el: '#app',
+    data: {
+      flag: true
+    },
+    methods: {},
 
+  })
+
+  new Vue({
+    el: '#app2',
+    data: {
+      flag: true
+    },
+    methods: {},
+
+  })
 </script>
 </body>
 </html>

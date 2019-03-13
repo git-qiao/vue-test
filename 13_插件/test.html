@@ -5,10 +5,24 @@
   <title>17_插件</title>
 </head>
 <body>
-
+<div id="app">
+  <p v-my-directive="msg"></p>
+</div>
 <script type="text/javascript" src="../js/vue.js"></script>
+<script src="./vue-mine.js"></script>
 <script type="text/javascript">
+  // 调用 `mine.install(Vue)`
+  Vue.use(mine)
 
+  const vm = new Vue({
+    el: '#app',
+    data: {
+      msg: 'I like you...'
+    }
+  })
+
+  Vue.myGlobalMethod()
+  vm.$myMethod()
 </script>
 </body>
 </html>

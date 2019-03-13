@@ -148,3 +148,6 @@
 
 ## 3). 使用指令
     <div v-my-directive='xxx'>
+    
+# 9. 可使用的GitHub接口
+https://api.github.com/search/repositories?q=v&sort=stars
