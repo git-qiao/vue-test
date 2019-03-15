@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件中的配置对象</title>
+</head>
+<body>
+  <div id="app">
+    <tem></tem>
+    <tem></tem>
+    <tem></tem>
+  </div>
+  <template id="add">
+    <div>
+      <h2>{{num}}</h2>
+      <button @click='addHandle'>+1撒大苏打</button>
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+
+    Vue.component('tem', {//全局注册的组件对象的配置选项
+      template: '#add',
+      data() {
+        return {
+          num: 0
+        }
+      },
+      methods: {
+        addHandle () {
+          this.num += 1
+        }
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      /*components: {
+        login: {
+          template: '<p>私有组件-----{{ss}}</p>',
+          data: function () {
+            return {
+              ss: '私有组件的ss'
+            }
+          }
+        }
+      }*/
+    })
+  </script>
+</body>
+</html>

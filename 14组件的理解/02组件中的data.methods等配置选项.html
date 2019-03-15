@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件中的配置对象</title>
+</head>
+<body>
+  <div id="app">
+    <h1>组件中的配置对象</h1>
+    <tem></tem>
+    <login/>
+  </div>
+  <template id="t">
+    <h2>组件中数据-----{{msg}}</h2>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+
+    Vue.component('tem', {//全局注册的组件对象的配置选项
+      template: '#t',
+      data() {
+        return {
+          msg: '组件中数据'
+        }
+      }
+    })
+
+    new Vue({
+      el: '#app',
+      components: {
+        login: {
+          template: '<p>私有组件-----{{ss}}</p>',
+          data: function () {
+            return {
+              ss: '私有组件的ss'
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

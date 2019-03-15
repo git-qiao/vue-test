@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>创建组件的第一种方式</h1>
+    <p>{{msg}}</p>
+    <my-tem></my-tem>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1.1使用Vue.extend({})创建全局的Vue组件   --  创建
+    const tem1 = Vue.extend({
+      template: '<span>这就是Vue.extend()创建的Vue组件</span>', //指定组件结构
+    })
+    // 1.2使用Vue.component('组件名', 创建出来的组件对象)   --  注册
+    Vue.component('my-tem', tem1)
+
+    new Vue({
+      el: '#app',
+      data: {
+        msg: '这是一个msg'
+      },
+      methods: {}
+    })
+  </script>
+</body>
+</html>

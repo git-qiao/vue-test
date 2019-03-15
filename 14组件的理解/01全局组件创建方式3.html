@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>创建组件的第三种方式</h1>
+    <p>{{msg}}</p>
+    <my-tem></my-tem>
+  </div>
+
+  <!--在被控制区域外面使用template元素，定义组件/模板结构-->
+  <template id="my">
+    <div>
+      <h3>这是通过template元素，在外部定义的组件结构，这个方式有代码的智能提示和高亮</h3>
+      <h3>其实现在的编码工具，同样也可以在2的方式有智能提示和高亮</h3>
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 方式3 -- 直接使用字面量创建模板/组件结构  -- 注册+创建组件/模板结构
+    Vue.component('myTem', {
+      template: '#my'
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        msg: '这是一个msg'
+      },
+      methods: {},
+      directives: {},  //私有指令
+      filters: {}, //私有过滤器
+      components: {} //私有组件注册
+    })
+  </script>
+</body>
+</html>

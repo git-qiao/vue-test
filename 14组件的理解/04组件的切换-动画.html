@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件的切换</title>
+  <style>
+    .my-enter,.my-leave-to{
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    .my-enter-active,.my-leave-active{
+      transition: opacity .5s,transform .5s;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <a href="#" @click.prevent="flag='login'">登录</a>
+    <a href="#" @click.prevent="flag='register'">注册</a><br/>
+    <transition name="my" mode="out-in">
+      <component :is="flag"></component>
+    </transition>
+  </div>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    // 全局注册组件login
+    Vue.component('login',{
+      template: '<h3 style="display: inline-block">login组件</h3>'
+    })
+
+    new Vue({
+      el: '#app',
+      components: {
+        register: {
+          template: '<h3 style="display: inline-block">register组件</h3>'
+        }
+      },
+      data: {
+        flag: 'login'
+      }
+    })
+  </script>
+</body>
+</html>

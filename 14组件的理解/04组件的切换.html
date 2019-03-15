@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件的切换</title>
+</head>
+<body>
+  <div id="app">
+    <a href="#" @click.prevent="flag=true">登录</a>
+    <a href="#" @click.prevent="flag=false">注册</a>
+    <login v-show="flag"></login>
+    <register v-show="!flag"></register>
+  </div>
+  <hr/>
+
+  <div id="app2">
+    <a href="#" @click.prevent="flag='login'">登录</a>
+    <a href="#" @click.prevent="flag='register'">注册</a>
+
+    <!--利用component标签的 is 属性进行切换-->
+    <component :is="flag"></component>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 全局注册组件login
+    Vue.component('login',{
+      template: '<h3>login组件</h3>'
+    })
+
+    new Vue({
+      el: '#app',
+      components: {
+        register: {
+          template: '<h3>register组件</h3>'
+        }
+      },
+      data: {
+        flag: true
+      }
+    })
+
+    new Vue({
+      el: '#app2',
+      components: {
+        register: {
+          template: '<h3>register组件</h3>'
+        }
+      },
+      data: {
+        flag: 'login'
+      }
+    })
+  </script>
+</body>
+</html>

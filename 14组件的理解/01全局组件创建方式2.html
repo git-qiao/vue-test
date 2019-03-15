@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h1>创建组件的第二种方式</h1>
+    <p>{{msg}}</p>
+    <my-tem2></my-tem2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 方式2 -- 直接使用字面量创建模板/组件结构  -- 注册+创建组件/模板结构
+    Vue.component('myTem2', {
+      template: '<span>这是个Vue组件</span>', //指定组件/模板结构
+    })
+
+    new Vue({
+      el: '#app',
+      data: {
+        msg: '这是一个msg'
+      },
+      methods: {}
+    })
+  </script>
+</body>
+</html>
